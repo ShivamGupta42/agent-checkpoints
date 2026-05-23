@@ -1,6 +1,6 @@
-# Review everything (adaptive multi-lens orchestrator)
+# Review only — one-shot adaptive multi-lens orchestrator
 
-<task>Review Everything: Adversarial multi-lens review of a PR diff. Classifies the diff, applies the relevant adversarial lenses (pr-review + up to 5 specialized lenses), dedupes findings across lenses, and produces one unified P0/P1/P2 list. For trivial diffs, classification skips most lenses and the output is essentially a focused pr-review; for substantial diffs, you get the full battery.</task>
+<task>Review Only: Adversarial multi-lens review of a PR diff. Classifies the diff, applies the relevant adversarial lenses (pr-review + up to 5 specialized lenses), dedupes findings across lenses, and produces one unified P0/P1/P2 list. One-shot review — does NOT fix anything. For a loop that reviews→fixes→re-reviews until shippable, use ::RF instead. For trivial diffs, classification skips most lenses and the output is essentially a focused pr-review; for substantial diffs, you get the full battery.</task>
 
 <analysis>
 STAGE 1 — CLASSIFY THE DIFF (always)
