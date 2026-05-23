@@ -69,7 +69,8 @@ Most prompts are run manually today — pick one, paste, run. A growing set are 
 
 - `idea-validate` (`::IV`) classifies the idea, then pulls JTBD + requirements-interview + competitor scan + risk surface + resource fit as needed; outputs a GO / NO-GO / MODIFY verdict with v1 scope or kill criteria. Use BEFORE you commit to building.
 - `plan-critique-3x` classifies the plan, then pulls JTBD + UX + validation as needed
-- `pr-review` (the upgraded `::R`) classifies the diff, then pulls security + perf + UX + migration-safety + quality-hunt as needed, dedupes findings, runs a confidence-gated verifier loop (max 3 iterations), and produces one P0/P1/P2 list
+- `pr-review` (`::RO`, "review only") classifies the diff, then pulls security + perf + UX + migration-safety + quality-hunt as needed, dedupes findings, runs a confidence-gated verifier loop (max 3 iterations), and produces one P0/P1/P2 list — one-shot, no fix
+- `review-and-fix` (`::RF`) wraps `::RO` in a loop: review → fix P0/P1 → re-review → repeat, until zero P0/P1 remain or the 5-cycle cap is hit. P2s are reported as "deferred — not blocking ship" and are never fixed inside this loop by design
 - `ship-and-cleanup` (the upgraded `::W`) pre-flight-checks, classifies the work, runs merge + worktree cleanup + adaptive doc cleanup + lessons-learned + final state check
 - `team-assembly-3r` proposes 3–5 personas, runs N rounds of discussion, outputs sequenced tasks
 
@@ -90,7 +91,7 @@ Most prompts are run manually today — pick one, paste, run. A growing set are 
    proof-of-understanding for P0 → unified P0/P1/P2 output
 ```
 
-All three chains identified in the original "worth building next" list have shipped (`idea-validate`, `pr-review` orchestrator via `::R`, `ship-and-cleanup` orchestrator via `::W`). The workflow loop is closed: idea → plan → review → ship.
+All three chains identified in the original "worth building next" list have shipped (`idea-validate`, `pr-review` orchestrator via `::RO`, `ship-and-cleanup` orchestrator via `::W`). With `::RF` layered on top of `::RO`, the review side now has both a one-shot and a self-closing loop. The workflow loop is closed: idea → plan → review → ship.
 
 Gaps I notice when actually using these on real projects:
 

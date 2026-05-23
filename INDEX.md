@@ -1,6 +1,6 @@
 # Prompts index
 
-Last synced 2026-05-17. 37 prompts.
+Last synced 2026-05-24. 38 prompts.
 
 ## planning
 
@@ -22,7 +22,8 @@ Last synced 2026-05-17. 37 prompts.
 - [`doc-cleanup`](dev/doc-cleanup.md) — Documentation cleanup and refresh
 - [`evaluate-feedback`](dev/evaluate-feedback.md) — Evaluate feedback deeply
 - [`fix-issues`](dev/fix-issues.md) — Fix identified issues
-- [`pr-review`](dev/pr-review.md) — Review everything (adaptive multi-lens orchestrator)
+- [`pr-review`](dev/pr-review.md) — Review only — one-shot adaptive multi-lens orchestrator
+- [`review-and-fix`](dev/review-and-fix.md) — Review-and-fix loop — iterate until no P0/P1 (P2s deferred)
 - [`ship-and-cleanup`](dev/ship-and-cleanup.md) — Ship cleanup (prepare branch, squash-merge, clean worktree)
 
 ## ux
