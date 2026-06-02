@@ -1,6 +1,6 @@
 # Prompts index
 
-Last synced 2026-05-24. 38 prompts.
+Last synced 2026-06-03. 38 prompts.
 
 ## planning
 
@@ -18,7 +18,7 @@ Last synced 2026-05-24. 38 prompts.
 
 ## dev
 
-- [`commit-push`](dev/commit-push.md) — Commit and push changes
+- [`commit-push`](dev/commit-push.md) — Commit and push changes, open PR if none exists
 - [`doc-cleanup`](dev/doc-cleanup.md) — Documentation cleanup and refresh
 - [`evaluate-feedback`](dev/evaluate-feedback.md) — Evaluate feedback deeply
 - [`fix-issues`](dev/fix-issues.md) — Fix identified issues
