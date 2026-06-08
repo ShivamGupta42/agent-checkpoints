@@ -1,6 +1,6 @@
 # Prompts index
 
-Last synced 2026-06-03. 38 prompts.
+Last synced 2026-06-09. 38 prompts.
 
 ## planning
 
@@ -10,7 +10,7 @@ Last synced 2026-06-03. 38 prompts.
 - [`plan-critique-5x`](planning/plan-critique-5x.md) — Adaptive plan critique (5 cycles)
 - [`principal-critique`](planning/principal-critique.md) — Principal engineer critique
 - [`requirements-interview`](planning/requirements-interview.md) — Requirements clarification interview
-- [`summarize`](planning/summarize.md) — Summarize plan or implementation
+- [`summarize`](planning/summarize.md) — Beginner-friendly plan or implementation explainer
 - [`team-assembly-1r`](planning/team-assembly-1r.md) — Team assembly (1 discussion round)
 - [`team-assembly-2r`](planning/team-assembly-2r.md) — Team assembly (2 discussion rounds)
 - [`team-assembly-3r`](planning/team-assembly-3r.md) — Team assembly (3 discussion rounds)
