@@ -1,27 +1,26 @@
 # Adaptive plan critique (1 cycle)
 
-Critique your plan with 1 adaptive review cycle.
+Critique your plan with 1 adaptive review cycle. The cycle has two phases: FRAME decides what to critique, EXECUTE does the critiquing. Derive the critique dimensions for THIS plan rather than running a fixed checklist.
 
-0. CLASSIFY: One sentence—is this plan user-facing, backend-only, infra, or mixed? State which lenses will run and which are skipped (one-line reason each).
+PHASE A — FRAME (spawn a SEPARATE agent so dimension-selection isn't anchored on the plan author's framing). It returns a critique frame:
+1. CLASSIFY: One sentence—user-facing, backend-only, infra, or mixed; and its blast radius.
+2. DERIVE DIMENSIONS: 3-6 plan-specific dimensions. Each gets a one-line "why it matters for this plan" + a severity-if-violated (P0/P1/P2). Pull from the catalog as relevant—architecture/consistency, performance/scale, cost, observability/ops, migration & rollout ordering, concurrency/idempotency, data integrity, JTBD, UX—and invent dimensions the catalog misses.
+3. ADVERSARIAL FRAMING: derive dimensions by answering "I'm writing the post-mortem for why this plan failed in production six months from now—which dimensions expose that?" Not the neutral "what could we check."
+4. MANDATORY EXCLUSIONS: name 1-2 dimensions you are deliberately NOT critiquing, each with a one-line reason. Blocks cherry-picking the easy lenses.
 
-1. ASSUMPTIONS (always): List every assumption. Spawn an agent per assumption group to verify—no agent limit. Rate confidence per assumption (1-10).
-
-2. LOW-CONFIDENCE RESOLUTION (always): For every assumption rated <7/10 in Stage 1, read the actual code to verify or refute. Don't guess. The goal is to enter Stage 3 with grounded understanding so the analyses below report on reality, not on the agent's prior assumptions. Subsequent stages may also read code if they surface new low-confidence areas.
-
-3. ARCHITECTURE (always): Flag risks, breaking changes, consistency issues, performance concerns. Pre-alpha = no migration debt, fix now not later. Findings should reference confidence anchors (verified by reading code in Stage 2 = 7-8; verified with test run = 9-10).
-
-4. USER IMPACT (only if user-facing or mixed; else skip with reason). Apply both:
-   - JTBD pass (per ::J): job statement, four forces (1-10), journey friction, highest-impact improvement
-   - UX critique pass (per ::UX): 8-category review with P0/P1/P2 fixes; friction-to-fix on the top item
-
-5. VALIDATION CRITERIA (always): apply per ::QV. Per change: observable "done" with edge cases / regression checks / integration contracts / rollback signal. Group P0 (blocks release) / P1 (should verify) / P2 (nice). Mark each automated/manual/production-only. Rate criteria completeness (1-10).
-
-6. REWRITE: Update plan with verified understanding, observations, questions surfaced, validation criteria appended.
+PHASE B — EXECUTE (run the floor first, then every derived dimension):
+1. FLOOR (always-on, thin):
+   - Assumptions + grounding: list every assumption, rate confidence 1-10. For each <7/10, read the actual code to verify or refute—spawn an agent per assumption group, no agent limit. Don't guess.
+   - Validation criteria (per ::QV): per change, observable "done" with edge cases / regression checks / integration contracts / rollback signal. Group P0/P1/P2, mark each automated/manual/production-only. Rate completeness (1-10).
+   - Security: ONLY if the classification flags a trust boundary (user input, auth, PHI/health, payment, external API). Else skip with one-line reason.
+2. DERIVED DIMENSIONS: critique against each dimension from Phase A. For user-facing dimensions, JTBD (per ::J) and UX (per ::UX) are the tools. Findings carry the severity assigned in the frame.
+3. REWRITE: Update plan with verified understanding, observations, questions surfaced, validation criteria appended.
 
 RULES:
 - Confidence anchors: 1-3=guessing, 4-6=informed but unverified, 7-8=verified by reading code, 9-10=verified with test run or external source
+- The FRAME agent picks dimensions but does NOT read all the code—grounding happens in Phase B. Frame fast, execute deep.
 - If you cannot determine something from available context (unclear scope, missing code, ambiguous requirement), STOP and ask one clarifying question rather than guessing
-- If a lens doesn't apply, say "skipped: [one-line reason]"—never fabricate findings to fill a section
+- If a floor lens or derived dimension doesn't apply, say "skipped: [one-line reason]"—never fabricate findings
 - NO implementation—planning only
 - NO quick wins—optimize for long-term architecture growth
 - NO deferring important changes (consistency, performance, correctness)
